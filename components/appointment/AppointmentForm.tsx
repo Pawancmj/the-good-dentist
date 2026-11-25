@@ -309,7 +309,7 @@ export function AppointmentForm() {
       noValidate
       className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]"
     >
-      <div className="rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-8">
+      <div className="min-w-0 rounded-3xl border border-line bg-white p-5 shadow-soft sm:p-8">
         <p className="sr-only" aria-live="polite">
           Step {step} of 4: {currentStep.heading}
         </p>
@@ -595,7 +595,7 @@ export function AppointmentForm() {
           ) : null}
         </div>
 
-        <div className="mt-8 flex items-center justify-between gap-3 border-t border-line-soft pt-6">
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-line-soft pt-6">
           {step > 1 ? (
             <Button
               type="button"
@@ -614,7 +614,7 @@ export function AppointmentForm() {
             type="submit"
             size="lg"
             disabled={status === "submitting"}
-            className="min-w-40"
+            className="min-w-40 ml-auto"
           >
             {status === "submitting" ? (
               <>

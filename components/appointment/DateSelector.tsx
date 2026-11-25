@@ -11,11 +11,20 @@ type DateSelectorProps = {
 
 export function DateSelector({ dates, value, onChange }: DateSelectorProps) {
   return (
-    <div>
+    // `min-w-0` keeps the selector's intrinsic width from propagating up
+    // through the grid ancestors and widening the whole page.
+    <div className="min-w-0">
       <div
         role="group"
         aria-label="Choose an appointment date"
-        className="no-scrollbar -mx-1 flex gap-2.5 overflow-x-auto px-1 pb-2"
+        className={cn(
+          "no-scrollbar -mx-1 gap-2.5 px-1 pb-2",
+          // Small screens: a wrapping grid so every date stays fully visible
+          // without any page-level horizontal scrolling.
+          "grid grid-cols-[repeat(auto-fill,minmax(4.5rem,1fr))]",
+          // Desktop: the original single-row strip, scrolling inside itself only.
+          "lg:flex lg:overflow-x-auto",
+        )}
       >
         {dates.map((date) => {
           const selected = date.iso === value;
@@ -31,7 +40,7 @@ export function DateSelector({ dates, value, onChange }: DateSelectorProps) {
               }`}
               onClick={() => onChange(date.iso)}
               className={cn(
-                "flex min-w-[4.5rem] flex-1 flex-col items-center gap-1 rounded-2xl border px-3 py-3.5 transition duration-200",
+                "flex min-w-[4.5rem] flex-1 flex-col items-center gap-1 rounded-2xl border px-2.5 py-3.5 transition duration-200 lg:px-3",
                 date.closed &&
                   "cursor-not-allowed border-line-soft bg-line-soft/60 text-muted/50",
                 !date.closed &&
